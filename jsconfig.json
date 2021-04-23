@@ -1,0 +1,17 @@
+{
+  "compilerOptions": {
+    "target": "ES6",
+    "module": "commonjs",
+    "baseUrl": ".",
+    "paths": {
+      "@app/*": ["app/*"],
+      "@api/*": ["app/api/*"],
+      "@config": ["config/*"],
+      "@db/*": ["db/*"],
+      "@domains/*": ["app/domains/*"],
+      "@lib/*": ["app/lib/*"],
+      "@models": ["app/models"],
+      "@repos": ["app/repos"]
+    }
+  }
+}
