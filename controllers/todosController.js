@@ -6,10 +6,8 @@ const {
   destroyAction
 } = require('@actions/todos');
 
-const mockCurrentUser = { id: 1 };
-
-const index = async (_req, res, _next) => {
-  const result = await indexAction(mockCurrentUser.id);
+const index = async (req, res, _next) => {
+  const result = await indexAction(req.currentUser.id);
 
   res.status(200).json({ todos: result.todos });
 };
@@ -17,7 +15,7 @@ const index = async (_req, res, _next) => {
 const create = async (req, res, _next) => {
   const result = await createAction({
     ...req.body.todo,
-    userId: mockCurrentUser.id
+    userId: req.currentUser.id
   });
 
   if (result.isSuccess) {

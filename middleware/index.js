@@ -1,3 +1,5 @@
 module.exports = {
-  commonMiddleware: require('./commonMiddleware')
+  commonMiddleware: require('./commonMiddleware'),
+  verifyToken: require('./verifyToken'),
+  setCurrentUser: require('./setCurrentUser')
 };

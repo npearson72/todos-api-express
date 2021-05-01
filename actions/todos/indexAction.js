@@ -3,9 +3,7 @@ const { Todo } = require('@models');
 const { serializeTodo } = require('./serializers');
 
 module.exports = async userId => {
-  console.log(userId);
-
-  const todos = await Todo.query().orderBy('id');
+  const todos = await Todo.query().where({ userId }).orderBy('id');
 
   const serializedTodos = todos.map(todo => serializeTodo(todo));
 

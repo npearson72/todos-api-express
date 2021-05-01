@@ -1,4 +1,5 @@
-const { hashPassword } = require('@lib/utils');
+const jwtDecode = require('jwt-decode');
+const { hashPassword, createToken } = require('@lib/utils');
 const { success, failure } = require('@lib/services');
 const { ValidationError } = require('@lib/errors');
 const { User } = require('@models');
@@ -10,7 +11,11 @@ module.exports = async rawParams => {
     const params = await validateParams(rawParams);
     const newUser = await createUser(params);
 
-    return success({ user: serializeUser(newUser) });
+    const token = createToken(newUser);
+    const decodedToken = jwtDecode(token);
+    const expiresAt = decodedToken.exp;
+
+    return success({ user: serializeUser(newUser), token, expiresAt });
   } catch (err) {
     if (err.name === 'ValidationError') return failure(err);
 
