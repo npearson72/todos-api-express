@@ -1,4 +1,5 @@
 module.exports = {
   authsRoutes: require('./authsRoutes'),
-  todosRoutes: require('./todosRoutes')
+  todosRoutes: require('./todosRoutes'),
+  usersRoutes: require('./usersRoutes')
 };

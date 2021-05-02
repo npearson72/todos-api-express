@@ -4,7 +4,7 @@
   "main": "server.js",
   "license": "MIT",
   "scripts": {
-    "start": "nodemon",
+    "start": "nodemon --ignore sessions/",
     "db:migrate": "knex migrate:latest --knexfile='config/db/knexfile.js'",
     "db:rollback": "knex migrate:down --knexfile='config/db/knexfile.js'",
     "db:create": "node -r dotenv/config lib/scripts/db/createDatabase.js",
@@ -13,18 +13,19 @@
   },
   "dependencies": {
     "bcryptjs": "^2.4.3",
+    "cookie-parser": "^1.4.5",
     "cors": "^2.8.5",
+    "csurf": "^1.11.0",
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
-    "express-jwt": "^6.0.0",
+    "express-session": "^1.17.1",
     "helmet": "^4.5.0",
     "joi": "^17.4.0",
-    "jsonwebtoken": "^8.5.1",
-    "jwt-decode": "^3.1.2",
     "knex": "^0.21.19",
     "module-alias": "^2.2.2",
     "objection": "^2.2.15",
-    "pg": "^8.6.0"
+    "pg": "^8.6.0",
+    "session-file-store": "^1.5.0"
   },
   "devDependencies": {
     "nodemon": "^2.0.7"

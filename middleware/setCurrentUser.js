@@ -1,14 +1,12 @@
-const jwtDecode = require('jwt-decode');
 const { UnauthorizedError } = require('@lib/errors');
 const { User } = require('@models');
 
 module.exports = async (req, _res, next) => {
   try {
-    const token = req.headers.authorization;
+    const userId = req.session.userId;
 
-    if (!token) throw new UnauthorizedError('Authorization token missing');
+    if (!userId) throw new UnauthorizedError('Invalid or missing session data');
 
-    const userId = jwtDecode(token).sub;
     const user = await findUser(userId);
 
     req.currentUser = user;
@@ -24,5 +22,5 @@ const findUser = async userId => {
 
   if (user) return user;
 
-  throw new UnauthorizedError('Authorization token invalid');
+  throw new UnauthorizedError('Invalid or missing session data');
 };
