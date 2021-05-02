@@ -8,7 +8,7 @@ module.exports = async (req, _res, next) => {
 
     if (!token) throw new UnauthorizedError('Authorization token missing');
 
-    const userId = jwtDecode(token).sub;
+    const userId = getUserIdFromToken(token);
     const user = await findUser(userId);
 
     req.currentUser = user;
@@ -16,6 +16,16 @@ module.exports = async (req, _res, next) => {
     next();
   } catch (err) {
     next(err);
+  }
+};
+
+const getUserIdFromToken = token => {
+  try {
+    const payload = jwtDecode(token);
+
+    return payload[`${process.env.AUTH0_JWT_NAMESPACE}/sub`];
+  } catch (err) {
+    throw new UnauthorizedError('Authorization token invalid');
   }
 };
 
