@@ -1,6 +1,4 @@
 const verifyAccessToken = require('./verifyAccessToken');
-const setCurrentUser = require('./setCurrentUser');
+const setCurrentUserId = require('./setCurrentUserId');
 
-const protectRoute = [verifyAccessToken, setCurrentUser];
-
-module.exports = { protectRoute, verifyAccessToken, setCurrentUser };
+module.exports = { protectRoute: [verifyAccessToken, setCurrentUserId] };

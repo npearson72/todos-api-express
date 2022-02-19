@@ -1,8 +1,9 @@
 const ErrorSerializer = require('jsonapi-serializer').Error;
 const { databaseErrorHandler } = require('@lib/errors/handlers');
+const { logError } = require('@lib');
 
 function globalErrorHandler(err, _req, res, _next) {
-  console.error(err);
+  logError(err);
 
   err = databaseErrorHandler(err);
 
@@ -11,7 +12,7 @@ function globalErrorHandler(err, _req, res, _next) {
   const jsonApiError = new ErrorSerializer({
     status: statusCode,
     code: err.code,
-    detail: err.message || 'Uknown error'
+    detail: err.message || 'Unexpected Error'
   });
 
   res.status(statusCode).json(jsonApiError);

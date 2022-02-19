@@ -7,7 +7,7 @@ const {
 } = require('./actions');
 
 const getAll = async (req, res) => {
-  const result = await getAllAction(req.currentUser.id);
+  const result = await getAllAction(req.currentUserId);
 
   res.status(200).json(result.todos);
 };
@@ -15,7 +15,7 @@ const getAll = async (req, res) => {
 const create = async (req, res) => {
   const result = await createAction({
     ...req.deserializedBody,
-    userId: req.currentUser.id
+    userId: req.currentUserId
   });
 
   res.status(201).json(result.todo);

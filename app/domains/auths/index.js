@@ -1,3 +1,3 @@
 module.exports = {
-  findOrCreateUser: require('./findOrCreateUser')
+  fetchAuthorizedUser: require('./fetchAuthorizedUser')
 };

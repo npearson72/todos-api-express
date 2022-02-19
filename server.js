@@ -1,5 +1,6 @@
 const database = require('@db');
 const app = require('@app');
+const { logError } = require('@lib');
 
 const port = require('config').get('port');
 
@@ -12,8 +13,7 @@ app.listen(port, () => {
 });
 
 process.on('unhandledRejection', err => {
-  console.log(err.name, err.message);
-  console.log('UNHANDLED REJECTION! Shutting down...');
+  logError('UNHANDLED REJECTION! Shutting down...\n', err);
 
   process.exit(1);
 });
